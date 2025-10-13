@@ -1,0 +1,45 @@
+mysql create database DB;
+Query OK, 1 row affected (0.01 sec)
+
+mysql use DB;
+Database changed
+mysql create table T(id int, name varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql insert into T values(101, ABC24);
+ERROR 1054 (42S22) Unknown column 'ABC24' in 'field list'
+mysql insert into T values(101, 'ABC24');
+Query OK, 1 row affected (0.03 sec)
+
+mysql select  from T;
++------+-------+
+ id    name  
++------+-------+
+  101  ABC24 
++------+-------+
+1 row in set (0.03 sec)
+
+mysql create table T1(empno int primary key, ename char, depno int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql insert into T1 values(121, KLM, 101);
+ERROR 1406 (22001) Data too long for column 'ename' at row 1
+mysql insert into T1 values(121, 'KLM', 101);
+ERROR 1406 (22001) Data too long for column 'ename' at row 1
+mysql insert into T1 values(121, 'K', 101);
+Query OK, 1 row affected (0.04 sec)
+
+mysql create table T2(custID int primary key, custName varchar(12), custNo int, constraint custNO_fk foreign key(custNO) references T1(depno));
+ERROR 6125 (HY000) Failed to add the foreign key constraint. Missing unique key for constraint 'custNO_fk' in the referenced table 't1'
+mysql create table T2(custID int primary key, custName varchar(12), custNo int, constraint custNO_fk foreign key(custNO) references T1(empno));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql desc T2;
++----------+-------------+------+-----+---------+-------+
+ Field     Type         Null  Key  Default  Extra 
++----------+-------------+------+-----+---------+-------+
+ custID    int          NO    PRI  NULL           
+ custName  varchar(12)  YES        NULL           
+ custNo    int          YES   MUL  NULL           
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)

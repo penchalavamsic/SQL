@@ -1,0 +1,76 @@
+-- 1. Create table
+mysql> CREATE TABLE EmployeeData(
+    -> emp_id INT,
+    -> emp_name VARCHAR(20),
+    -> salary DECIMAL(10,2),
+    -> bonus DECIMAL(10,2),
+    -> performance_score INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+-- 2. Insert data
+mysql> INSERT INTO EmployeeData VALUES
+    -> (101, 'A', 2500.36, 100.5, 75),
+    -> (102, 'B', 1500.36, -50.5, 65),
+    -> (103, 'C', 8556.00, 67.8, 78),
+    -> (104, 'D', 7805.00, -638.00, 90);
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+-- 3. Select numeric functions for all employees
+mysql> SELECT
+    -> emp_id,
+    -> emp_name,
+    -> ABS(bonus) AS Absolute_Bonus,
+    -> ROUND(salary, 2) AS Rounded_Salary,
+    -> CEIL(salary) AS Salary_Ceil,
+    -> FLOOR(salary) AS Salary_Floor,
+    -> (salary + bonus) AS Total_Compensation,
+    -> SQRT(performance_score) AS Sqrt_Score,
+    -> MOD(performance_score, 5) AS Remainder_5,
+    -> RAND() AS Lucky_Number
+    -> FROM EmployeeData;
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+---------------------+
+| emp_id | emp_name | Absolute_Bonus | Rounded_Salary | Salary_Ceil | Salary_Floor | Total_Compensation | Sqrt_Score        | Remainder_5 | Lucky_Number        |
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+---------------------+
+|    101 | A        |         100.50 |        2500.36 |        2501 |         2500 |            2600.86 | 8.660254037844387 |           0 | 0.5221517957021965  |
+|    102 | B        |          50.50 |        1500.36 |        1501 |         1500 |            1449.86 | 8.06225774829855  |           0 | 0.9196259108554813  |
+|    103 | C        |          67.80 |        8556.00 |        8556 |         8556 |            8623.80 | 8.831760866327848 |           3 | 0.03167419790446218 |
+|    104 | D        |         638.00 |        7805.00 |        7805 |         7805 |            7167.00 | 9.486832980505138 |           0 | 0.3994932876895119  |
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+---------------------+
+4 rows in set (0.03 sec)
+
+-- 4. Select numeric functions for a single employee (emp_id = 103)
+mysql> SELECT
+    -> emp_id,
+    -> emp_name,
+    -> ABS(bonus) AS Absolute_Bonus,
+    -> ROUND(salary, 2) AS Rounded_Salary,
+    -> CEIL(salary) AS Salary_Ceil,
+    -> FLOOR(salary) AS Salary_Floor,
+    -> (salary + bonus) AS Total_Compensation,
+    -> SQRT(performance_score) AS Sqrt_Score,
+    -> MOD(performance_score, 5) AS Remainder_5,
+    -> RAND() AS Lucky_Number
+    -> FROM EmployeeData
+    -> WHERE emp_id = 103;
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+--------------------+
+| emp_id | emp_name | Absolute_Bonus | Rounded_Salary | Salary_Ceil | Salary_Floor | Total_Compensation | Sqrt_Score        | Remainder_5 | Lucky_Number       |
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+--------------------+
+|    103 | C        |          67.80 |        8556.00 |        8556 |         8556 |            8623.80 | 8.831760866327848 |           3 | 0.9024438754678181 |
++--------+----------+----------------+----------------+-------------+--------------+--------------------+-------------------+-------------+--------------------+
+1 row in set (0.00 sec)
+
+-- 5. Aggregate numeric functions
+mysql> SELECT
+    -> MIN(salary) AS Min_Salary,
+    -> MAX(salary) AS Max_Salary,
+    -> SUM(salary) AS Total_Salary,
+    -> ROUND(AVG(salary), 2) AS Avg_Salary
+    -> FROM EmployeeData;
++-----------+-----------+-------------+------------+
+| Min_Salary| Max_Salary| Total_Salary| Avg_Salary |
++-----------+-----------+-------------+------------+
+|   1500.36 |   8556.00 |    20161.72 |   5040.43  |
++-----------+-----------+-------------+------------+
+1 row in set (0.00 sec)

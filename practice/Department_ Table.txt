@@ -1,0 +1,127 @@
+###Department Table Practical
+
+---
+
+**1. Create Department Table**
+
+```sql
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(15) NOT NULL,
+    location VARCHAR(20)
+);
+```
+
+Output:
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
+
+---
+
+**2. Add Multiple Columns**
+
+```sql
+ALTER TABLE Department
+ADD (HR VARCHAR(20), sales VARCHAR(20), IT VARCHAR(10));
+```
+
+Output:
+
+```
+Query OK, 0 rows affected (0.05 sec)
+```
+
+---
+
+**3. Check Table Structure**
+
+```sql
+DESC Department;
+```
+
+Output:
+
+| Field     | Type        | Null | Key | Default | Extra |
+| --------- | ----------- | ---- | --- | ------- | ----- |
+| dept_id   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(15) | NO   |     | NULL    |       |
+| location  | varchar(20) | YES  |     | NULL    |       |
+| HR        | varchar(20) | YES  |     | NULL    |       |
+| sales     | varchar(20) | YES  |     | NULL    |       |
+| IT        | varchar(10) | YES  |     | NULL    |       |
+
+---
+
+**4. Insert Multiple Rows**
+
+```sql
+INSERT INTO Department
+VALUES
+(101, "A", "BLR", "1B", "P1", "K1"),
+(102, "B", "HYD", "2B", "P2", "K2"),
+(103, "C", "CHN", "3B", "P3", "K3");
+```
+
+Output:
+
+```
+Query OK, 3 rows affected (0.01 sec)
+```
+
+---
+
+**5. Insert with Column Count Mismatch**
+
+```sql
+INSERT INTO Department VALUES (104, "MH", "4B", "P4", "K4");
+```
+
+Error:
+
+```
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+```
+
+---
+
+**6. Insert NULL into NOT NULL Column**
+
+```sql
+INSERT INTO Department VALUES (104, NULL, "MH", "4B", "P4", "K4");
+```
+
+Error:
+
+```
+ERROR 1048 (23000): Column 'dept_name' cannot be null
+```
+
+---
+
+**7. Add UNIQUE Constraint**
+
+```sql
+ALTER TABLE Department
+ADD CONSTRAINT unique_dept_name UNIQUE (dept_name);
+```
+
+Output:
+
+```
+Query OK, 0 rows affected (0.04 sec)
+```
+
+---
+
+**8. Attempt to Insert Duplicate dept_name**
+
+```sql
+INSERT INTO Department VALUES (104, "A", "MH", "4B", "P4", "K4");
+```
+
+Error:
+
+```
+ERROR 1062 (23000): Duplicate entry 'A' for key 'department.unique_dept_name'

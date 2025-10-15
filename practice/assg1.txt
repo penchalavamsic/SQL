@@ -237,3 +237,47 @@ mysql> select clerk_name, job_title from ClerkData where dept_id in(20);
 | Helen      | Payroll Clerk   |
 +------------+-----------------+
 4 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE Clerks (
+    ->     clerk_id INT PRIMARY KEY,
+    ->     clerk_name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Clerks (clerk_id, clerk_name) VALUES
+    -> (1, 'Alice'),
+    -> (2, 'Bob'),
+    -> (3, 'Charlie'),
+    -> (4, 'David'),
+    -> (5, 'Eve'),
+    -> (6, 'Frank'),
+    -> (7, 'Grace'),
+    -> (8, 'Helen');
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select clerk_name from clerks where clerk_name regexp 'TH' or 'LL';
+Empty set, 1 warning (0.02 sec)
+
+mysql> INSERT INTO Clerks (clerk_id, clerk_name) VALUES
+    -> (12, 'Theresa'),    -- contains "TH"
+    -> (13, 'Phillip'),    -- contains "LL"
+    -> (14, 'Mathias'),    -- contains "TH"
+    -> (15, 'Allison'),    -- contains "LL"
+    -> (16, 'Nathan'),     -- contains "TH"
+    -> (17, 'Bella'),      -- contains "LL"
+    -> (18, 'Ethel');      -- contains "TH"
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select clerk_name from clerks where clerk_name regexp 'TH' or 'LL';
++------------+
+| clerk_name |
++------------+
+| Theresa    |
+| Mathias    |
+| Nathan     |
+| Ethel      |
++------------+
+4 rows in set, 1 warning (0.00 sec)

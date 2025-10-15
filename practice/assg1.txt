@@ -1,0 +1,239 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| companydb          |
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.02 sec)
+
+mysql> use companydb;
+Database changed
+
+mysql> create table Salgrade(deptname varchar(20), dept_id int primary key, sales_id int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into salgrade values("1A",101, 201),("2A",102, 202),("3A",103, 203),("4A",104, 204);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Salgrade;
++----------+---------+----------+
+| deptname | dept_id | sales_id |
++----------+---------+----------+
+| 1A       |     101 |      201 |
+| 2A       |     102 |      202 |
+| 3A       |     103 |      203 |
+| 4A       |     104 |      204 |
++----------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create table Emp(empid int, emp_name varchar(10), dept_id int, dept_name varchar(20), salary int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into Emp values(121, "Hari", 101, "CS", 1200),(131, "Vishnu", 102, "DS", 1300),(141, "Vamsi", 101, "CS", 1200);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from Emp;
++-------+----------+---------+-----------+--------+
+| EMPID | EMP_NAME | DEPT_ID | DEPT_NAME | SALARY |
++-------+----------+---------+-----------+--------+
+|   121 | Hari     |     101 | CS        |   1200 |
+|   131 | Vishnu   |     102 | DS        |   1300 |
+|   141 | Vamsi    |     101 | CS        |   1200 |
++-------+----------+---------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> create table Dep(empid int, emp_name varchar(10), dept_id int, dept_name varchar(20), salary int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into Dep values(121, "Hari", 101, "CS", 1200),(131, "Vishnu", 102, "DS", 1300),(141, "Vamsi", 101, "CS", 1200);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from Dep;
++-------+----------+---------+-----------+--------+
+| EMPID | EMP_NAME | DEPT_ID | DEPT_NAME | SALARY |
++-------+----------+---------+-----------+--------+
+|   121 | Hari     |     101 | CS        |   1200 |
+|   131 | Vishnu   |     102 | DS        |   1300 |
+|   141 | Vamsi    |     101 | CS        |   1200 |
++-------+----------+---------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> create table EmployeeData (
+    -> emp_id int primary key,
+    -> emp_name varchar(30),
+    -> salary decimal(10,2),
+    -> dept varchar(20)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into EmployeeData values
+    -> (101, 'Alice', 950.50, 'HR'),
+    -> (102, 'Bob', 1200.00, 'IT'),
+    -> (103, 'Charlie', 1800.00, 'Finance'),
+    -> (104, 'David', 2200.75, 'IT'),
+    -> (105, 'Eve', 1550.25, 'Sales'),
+    -> (106, 'Frank', 1999.99, 'Support'),
+    -> (107, 'Grace', 2500.00, 'Marketing');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from EmployeeData where salary between 1000 and 2000;
++--------+----------+---------+---------+
+| emp_id | emp_name | salary  | dept    |
++--------+----------+---------+---------+
+|    102 | Bob      | 1200.00 | IT      |
+|    103 | Charlie  | 1800.00 | Finance |
+|    105 | Eve      | 1550.25 | Sales   |
+|    106 | Frank    | 1999.99 | Support |
++--------+----------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table Department (
+    -> dept_no int primary key,
+    -> dept_name varchar(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into Department values
+    -> (10, 'Finance'),
+    -> (20, 'Human Resources'),
+    -> (30, 'IT'),
+    -> (40, 'Marketing'),
+    -> (50, 'Sales'),
+    -> (60, 'Support');
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select dept_no, dept_name from Department order by dept_name;
++---------+-----------------+
+| dept_no | dept_name       |
++---------+-----------------+
+|      10 | Finance         |
+|      20 | Human Resources |
+|      30 | IT              |
+|      40 | Marketing       |
+|      50 | Sales           |
+|      60 | Support         |
++---------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> create table JobData (
+    -> job_id int primary key,
+    -> job_title varchar(50),
+    -> min_salary decimal(10,2),
+    -> max_salary decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into JobData values
+    -> (1, 'Software Engineer', 30000.00, 80000.00),
+    -> (2, 'Data Analyst', 25000.00, 70000.00),
+    -> (3, 'Project Manager', 50000.00, 120000.00),
+    -> (4, 'System Administrator', 28000.00, 75000.00),
+    -> (5, 'UI/UX Designer', 27000.00, 65000.00),
+    -> (6, 'HR Executive', 20000.00, 50000.00),
+    -> (7, 'Marketing Specialist', 22000.00, 60000.00);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select job_title from JobData;
++----------------------+
+| job_title            |
++----------------------+
+| Software Engineer    |
+| Data Analyst         |
+| Project Manager      |
+| System Administrator |
+| UI/UX Designer       |
+| HR Executive         |
+| Marketing Specialist |
++----------------------+
+7 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_companydb |
++---------------------+
+| dep                 |
+| department          |
+| emp                 |
+| employeedata        |
+| jobdata             |
+| salgrade            |
++---------------------+
+6 rows in set (0.01 sec)
+
+mysql> create table Employee (
+    -> emp_id int primary key,
+    -> emp_name varchar(30),
+    -> dept_no int,
+    -> salary decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into Employee values
+    -> (101, 'Alice', 10, 30000.00),
+    -> (102, 'Bob', 20, 28000.00),
+    -> (103, 'Charlie', 30, 35000.00),
+    -> (104, 'David', 10, 40000.00),
+    -> (105, 'Eve', 20, 32000.00),
+    -> (106, 'Frank', 30, 37000.00),
+    -> (107, 'Grace', 10, 45000.00),
+    -> (108, 'Helen', 20, 29000.00),
+    -> (109, 'Ian', 30, 33000.00);
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select emp_name from Employee where dept_no in(10, 20) order by emp_name ASC;
++----------+
+| emp_name |
++----------+
+| Alice    |
+| Bob      |
+| David    |
+| Eve      |
+| Grace    |
+| Helen    |
++----------+
+6 rows in set (0.00 sec)
+
+mysql> create table ClerkData (
+    -> clerk_id int primary key,
+    -> clerk_name varchar(30),
+    -> job_title varchar(30),
+    -> dept_id int
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into ClerkData values
+    -> (1, 'Alice', 'Accounts Clerk', 10),
+    -> (2, 'Bob', 'Office Clerk', 20),
+    -> (3, 'Charlie', 'Data Entry Clerk', 10),
+    -> (4, 'David', 'Inventory Clerk', 20),
+    -> (5, 'Eve', 'Records Clerk', 10),
+    -> (6, 'Frank', 'Billing Clerk', 20),
+    -> (7, 'Grace', 'File Clerk', 10),
+    -> (8, 'Helen', 'Payroll Clerk', 20);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select clerk_name, job_title from ClerkData where dept_id in(20);
++------------+-----------------+
+| clerk_name | job_title       |
++------------+-----------------+
+| Bob        | Office Clerk    |
+| David      | Inventory Clerk |
+| Frank      | Billing Clerk   |
+| Helen      | Payroll Clerk   |
++------------+-----------------+
+4 rows in set (0.00 sec)

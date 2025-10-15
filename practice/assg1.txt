@@ -422,3 +422,45 @@ mysql> select emp_name from employee where role="Manager";
 | Eve      |
 +----------+
 3 rows in set (0.00 sec)
+
+///
+mysql> CREATE TABLE EmployeeRemuneration (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(30),
+    ->     dept_no INT,
+    ->     salary DECIMAL(10,2),
+    ->     bonus DECIMAL(10,2),
+    ->     allowance DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO EmployeeRemuneration (emp_id, emp_name, dept_no, salary, bonus, allowance) VALUES
+    -> (101, 'Alice', 10, 50000.00, 5000.00, 2000.00),
+    -> (102, 'Bob', 10, 40000.00, 3000.00, 1500.00),
+    -> (103, 'Charlie', 20, 55000.00, 4000.00, 2500.00),
+    -> (104, 'David', 20, 45000.00, 3500.00, 2000.00),
+    -> (105, 'Eve', 30, 60000.00, 6000.00, 3000.00),
+    -> (106, 'Frank', 30, 48000.00, 2500.00, 1800.00),
+    -> (107, 'Grace', 10, 42000.00, 2000.00, 1500.00),
+    -> (108, 'Helen', 20, 47000.00, 3000.00, 1600.00);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select emp_name, sum(salary,bonus, allowance) from employeeRemuneration;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',bonus, allowance) from employeeRemuneration' at line 1
+mysql> select emp_name, salary+bonus+allowance from employeeRemuneration;
++----------+------------------------+
+| emp_name | salary+bonus+allowance |
++----------+------------------------+
+| Alice    |               57000.00 |
+| Bob      |               44500.00 |
+| Charlie  |               61500.00 |
+| David    |               50500.00 |
+| Eve      |               69000.00 |
+| Frank    |               52300.00 |
+| Grace    |               45500.00 |
+| Helen    |               51600.00 |
++----------+------------------------+
+8 rows in set (0.00 sec)
+
+

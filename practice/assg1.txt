@@ -16,6 +16,8 @@ mysql> show databases;
 mysql> use companydb;
 Database changed
 
+//1. Select all information from Salgrade table.
+
 mysql> create table Salgrade(deptname varchar(20), dept_id int primary key, sales_id int);
 Query OK, 0 rows affected (0.03 sec)
 
@@ -41,6 +43,8 @@ mysql> insert into Emp values(121, "Hari", 101, "CS", 1200),(131, "Vishnu", 102,
 Query OK, 3 rows affected (0.01 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
+//2. Select all information from emp table.
+
 mysql> select * from Emp;
 +-------+----------+---------+-----------+--------+
 | EMPID | EMP_NAME | DEPT_ID | DEPT_NAME | SALARY |
@@ -57,6 +61,8 @@ Query OK, 0 rows affected (0.02 sec)
 mysql> insert into Dep values(121, "Hari", 101, "CS", 1200),(131, "Vishnu", 102, "DS", 1300),(141, "Vamsi", 101, "CS", 1200);
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
+
+//3. Select all information from dep table.
 
 mysql> select * from Dep;
 +-------+----------+---------+-----------+--------+
@@ -87,6 +93,8 @@ mysql> insert into EmployeeData values
 Query OK, 7 rows affected (0.01 sec)
 Records: 7  Duplicates: 0  Warnings: 0
 
+//4. List all employees who have a salary between 1000 and 2000
+
 mysql> select * from EmployeeData where salary between 1000 and 2000;
 +--------+----------+---------+---------+
 | emp_id | emp_name | salary  | dept    |
@@ -113,6 +121,8 @@ mysql> insert into Department values
     -> (60, 'Support');
 Query OK, 6 rows affected (0.01 sec)
 Records: 6  Duplicates: 0  Warnings: 0
+
+//5. List department numbers and names in department name order
 
 mysql> select dept_no, dept_name from Department order by dept_name;
 +---------+-----------------+
@@ -145,6 +155,8 @@ mysql> insert into JobData values
     -> (7, 'Marketing Specialist', 22000.00, 60000.00);
 Query OK, 7 rows affected (0.01 sec)
 Records: 7  Duplicates: 0  Warnings: 0
+
+//6. Display all the different job types
 
 mysql> select job_title from JobData;
 +----------------------+
@@ -194,6 +206,9 @@ mysql> insert into Employee values
 Query OK, 9 rows affected (0.01 sec)
 Records: 9  Duplicates: 0  Warnings: 0
 
+//7. List the details of the employees in departments 10 and 20 in
+alphabetical order of employee names
+
 mysql> select emp_name from Employee where dept_no in(10, 20) order by emp_name ASC;
 +----------+
 | emp_name |
@@ -227,6 +242,8 @@ mysql> insert into ClerkData values
 Query OK, 8 rows affected (0.01 sec)
 Records: 8  Duplicates: 0  Warnings: 0
 
+//8. List names and jobs of all clerks in department 20.
+
 mysql> select clerk_name, job_title from ClerkData where dept_id in(20);
 +------------+-----------------+
 | clerk_name | job_title       |
@@ -257,6 +274,8 @@ mysql> INSERT INTO Clerks (clerk_id, clerk_name) VALUES
 Query OK, 8 rows affected (0.01 sec)
 Records: 8  Duplicates: 0  Warnings: 0
 
+//9. Display all employee names which have TH or LL in them.
+
 mysql> select clerk_name from clerks where clerk_name regexp 'TH' or 'LL';
 Empty set, 1 warning (0.02 sec)
 
@@ -270,6 +289,8 @@ mysql> INSERT INTO Clerks (clerk_id, clerk_name) VALUES
     -> (18, 'Ethel');      -- contains "TH"
 Query OK, 7 rows affected (0.01 sec)
 Records: 7  Duplicates: 0  Warnings: 0
+
+
 
 mysql> select clerk_name from clerks where clerk_name regexp 'TH' or 'LL';
 +------------+
@@ -413,6 +434,8 @@ mysql> INSERT INTO Employee (emp_id, emp_name, dept_no, role, manager_id) VALUES
 Query OK, 8 rows affected (0.01 sec)
 Records: 8  Duplicates: 0  Warnings: 0
 
+//10.List the details of the employees who have a manager.
+
 mysql> select emp_name from employee where role="Manager";
 +----------+
 | emp_name |
@@ -445,6 +468,12 @@ mysql> INSERT INTO EmployeeRemuneration (emp_id, emp_name, dept_no, salary, bonu
     -> (108, 'Helen', 20, 47000.00, 3000.00, 1600.00);
 Query OK, 8 rows affected (0.01 sec)
 Records: 8  Duplicates: 0  Warnings: 0
+
+//12.Display name, annual salary and commission of all sales people
+whose monthly salary is greater than their commission. The output
+should be ordered by salary highest first. If two or more employees
+have the same salary sort by employee name, within the highest
+salary order.
 
 mysql> select emp_name, sum(salary,bonus, allowance) from employeeRemuneration;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',bonus, allowance) from employeeRemuneration' at line 1
@@ -483,6 +512,8 @@ SELECT
 +---------+---------------+------------+
 //
 
+//13.Display all employees who were hired during 1982.
+
 mysql> select ename from emp where year(hiredate) >=1982 order by hiredate;
 +--------+
 | ename  |
@@ -493,7 +524,9 @@ mysql> select ename from emp where year(hiredate) >=1982 order by hiredate;
 +--------+
 3 rows in set (0.00 sec)
 
-//
+//14.Display the employee name and job by concatenating them and
+give an appropriate heading
+
 mysql> select concat(ename,'-',job) as 'Employee Details' from emp;
 +------------------+
 | Employee Details |
@@ -515,7 +548,9 @@ mysql> select concat(ename,'-',job) as 'Employee Details' from emp;
 +------------------+
 14 rows in set (0.00 sec)
 
-//
+//15.Display the employee name and the job in brackets
+
+
 select concat('(',ename,'-',job,')') as 'Employee Details' from emp;
 +-------------------+
 | Employee Details  |
@@ -536,6 +571,38 @@ select concat('(',ename,'-',job,')') as 'Employee Details' from emp;
 | (MILLER-CLERK)    |
 +-------------------+
 
-//
+//16.It has been discovered that the sales people in department 30 are
+not all male. Hence display the job of salesman as salesperson
+
+mysql> SELECT
+    ->     ename,
+    ->     deptno,
+    ->     SUBSTRING(
+    ->         CASE
+    ->             WHEN deptno = 30 AND job = 'SALESMAN' THEN 'SALESPERSON'
+    ->             ELSE job
+    ->         END, 1, 10
+    ->     ) AS job
+    -> FROM emp;
++--------+--------+------------+
+| ename  | deptno | job        |
++--------+--------+------------+
+| SMITH  |     20 | CLERK      |
+| ALLEN  |     30 | SALESPERSO |
+| WARD   |     30 | SALESPERSO |
+| JONES  |     20 | MANAGER    |
+| MARTIN |     30 | SALESPERSO |
+| BLAKE  |     30 | MANAGER    |
+| CLARK  |     10 | MANAGER    |
+| SCOTT  |     20 | ANALYST    |
+| KING   |     10 | PRESIDENT  |
+| TURNER |     30 | SALESPERSO |
+| ADAMS  |     20 | CLERK      |
+| JAMES  |     30 | CLERK      |
+| FORD   |     20 | ANALYST    |
+| MILLER |     10 | CLERK      |
++--------+--------+------------+
+14 rows in set (0.00 sec)
+
 
 

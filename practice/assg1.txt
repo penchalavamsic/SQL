@@ -514,3 +514,28 @@ mysql> select concat(ename,'-',job) as 'Employee Details' from emp;
 | MILLER-CLERK     |
 +------------------+
 14 rows in set (0.00 sec)
+
+//
+select concat('(',ename,'-',job,')') as 'Employee Details' from emp;
++-------------------+
+| Employee Details  |
++-------------------+
+| (SMITH-CLERK)     |
+| (ALLEN-SALESMAN)  |
+| (WARD-SALESMAN)   |
+| (JONES-MANAGER)   |
+| (MARTIN-SALESMAN) |
+| (BLAKE-MANAGER)   |
+| (CLARK-MANAGER)   |
+| (SCOTT-ANALYST)   |
+| (KING-PRESIDENT)  |
+| (TURNER-SALESMAN) |
+| (ADAMS-CLERK)     |
+| (JAMES-CLERK)     |
+| (FORD-ANALYST)    |
+| (MILLER-CLERK)    |
++-------------------+
+
+//
+
+

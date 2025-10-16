@@ -601,8 +601,5 @@ mysql> SELECT
 | JAMES  |     30 | CLERK      |
 | FORD   |     20 | ANALYST    |
 | MILLER |     10 | CLERK      |
-+--------+--------+------------+
-14 rows in set (0.00 sec)
-
-
++--------+--------+------------
 

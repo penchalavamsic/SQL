@@ -463,4 +463,34 @@ mysql> select emp_name, salary+bonus+allowance from employeeRemuneration;
 +----------+------------------------+
 8 rows in set (0.00 sec)
 
+//
+SELECT
+    ->     emp_name AS Name,
+    ->     (monthly_salary * 12) AS Annual_Salary,
+    ->     commission AS Commission
+    -> FROM SalesPeople
+    -> WHERE monthly_salary > commission
+    -> ORDER BY monthly_salary DESC, emp_name ASC;
++---------+---------------+------------+
+| Name    | Annual_Salary | Commission |
++---------+---------------+------------+
+| Evelyn  |     108000.00 |    2000.00 |
+| Bob     |      84000.00 |    6500.00 |
+| Charlie |      84000.00 |    3000.00 |
+| Henry   |      84000.00 |    4000.00 |
+| Alice   |      60000.00 |    2000.00 |
+| Grace   |      60000.00 |    1000.00 |
++---------+---------------+------------+
+//
 
+mysql> select ename from emp where year(hiredate) >=1982 order by hiredate;
++--------+
+| ename  |
++--------+
+| MILLER |
+| ADAMS  |
+| SCOTT  |
++--------+
+3 rows in set (0.00 sec)
+
+//

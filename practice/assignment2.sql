@@ -6,7 +6,7 @@ select ename as Employee,
 		when sal >1500 then sal
         when sal=1500 then 'on target'
         else 'below 1500'
-	end as salary_status
+	end as salary
 from emp;
     
 	

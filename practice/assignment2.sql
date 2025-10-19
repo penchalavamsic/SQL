@@ -8,5 +8,6 @@ select ename as Employee,
         else 'below 1500'
 	end as salary
 from emp;
-    
+select e.ename , e.sal , m.min_sal as minimum_salary from emp e join(select min(sal)as min_sal from emp)m;
+
 	

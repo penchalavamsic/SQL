@@ -11,3 +11,4 @@ from emp;
 select e.ename , e.sal , m.min_sal as minimum_salary from emp e join(select min(sal)as min_sal from emp)m;
 
 select e.ename, e.sal, m.min_sal, m.max_sal, m.avg_sal from emp e join (select min(sal) as min_sal, max(sal) as max_sal, round(avg(sal), 2) as avg_sal from emp)m;
+select job, (select min(sal) from emp e2 where e2.job=e1.job) as min_sal, (select max(sal) from emp e2 where e2.job=e1.job) as max_sal from emp e1 group by job;

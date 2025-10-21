@@ -14,4 +14,4 @@ select e.ename, e.sal, m.min_sal, m.max_sal, m.avg_sal from emp e join (select m
 select job, (select min(sal) from emp e2 where e2.job=e1.job) as min_sal, (select max(sal) from emp e2 where e2.job=e1.job) as max_sal from emp e1 group by job;
 select job, (select avg(sal) from emp e2 where e2.job=e1.job) as avg_sal, (select sum(sal*12) from emp e2 where e2.job=e1.job) as total_rem from emp e1 group by job;
 select job , max(sal) - min(sal) as difference from emp group by job;
- 
+ select job, count(*)as emp_count from emp group by job having count(*)>3 ;

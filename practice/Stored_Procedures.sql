@@ -36,6 +36,8 @@ begin
 delimiter ;
 call resetSal();
 
+
+
 -- 2. Create a procedure to delete all employees in the HR department.
 delimiter $$
 create procedure deleHR()
@@ -46,4 +48,15 @@ begin
 end $$
 delimiter ;
 call deleHR();
+
+-- 3.Create a procedure to increase all employee salaries by 5%
+delimiter $$
+create procedure inc_sal()
+begin
+set sql_safe_updates=0;
+update employees set salary=salary*1.05;
+select * from employees;
+end $$
+delimiter ;
+call inc_sal();
 

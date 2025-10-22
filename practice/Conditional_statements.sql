@@ -42,4 +42,27 @@ end if;
 end //
 delimiter ;
 call grade(88);
+
+
+
+-- case 
+delimiter //
+create procedure traffic(in a varchar(20))
+begin 
+	declare color varchar(20);
+	case a
+		when 'Red' then
+			set color='Stop';
+		when 'Yellow' then
+			set color='Wait';
+		when 'Green' then
+			set color='Go';
+	else 
+		set color='Invalid input';
+	end case;
+select color as output;
+end //
+delimiter ;
+call traffic('Green');
+call traffic('Blue');
 	

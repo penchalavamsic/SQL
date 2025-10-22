@@ -75,6 +75,24 @@ end $$
 delimiter ;
 call new_emp('Hari', 30000, 'IT');
 
+-- 5.Create a procedure to insert a new department (IN parameters)
+delimiter $$
+create procedure new_dep(
+in depart varchar(10))
+begin
+	set sql_safe_updates=0;
+	 insert into employees(department) values(depart);
+	select * from employees;
+end $$
+delimiter ;
+
+call new_dep('Sales');
+
+--6. Create a procedure to delete an employee by name (IN parameter)
+
+
+
+
 
 
 

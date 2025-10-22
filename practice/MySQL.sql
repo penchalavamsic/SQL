@@ -36,4 +36,17 @@ delimiter ;
 call multiple(5, @out);
 select @out;
 
+-- inout parameter
+delimiter $$
+create procedure doubleval(inout a int)
+begin
+ set a=a*2;
+end $$
+delimiter ;
+set @a=10;
+call doubleval(@a);
+select @a;
+ 
+
+
 

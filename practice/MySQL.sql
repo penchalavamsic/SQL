@@ -26,6 +26,14 @@ end $$
 delimiter ;
 call sumOf(5,10);
 
--- out parameter
+-- out parameter, session variable @
+delimiter $$
+create procedure multiple(in a int, out result int)
+begin 
+set result=a*a;
+end $$
+delimiter ;
+call multiple(5, @out);
+select @out;
 
 

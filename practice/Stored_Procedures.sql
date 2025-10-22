@@ -99,6 +99,17 @@ end $$
 delimiter ;
 call del_emp('Bob');
 
+-- 7. Create a procedure to change an employee’s department (IN parameters).
+delimiter $$
+create procedure emp_dep(in dep varchar(20))
+begin
+ set sql_safe_updates=0;
+ update employees set department='IT' where department=dep;
+ select *from employees;
+ end $$
+ delimiter ;
+ call emp_dep('Sales')
+
 
 
 

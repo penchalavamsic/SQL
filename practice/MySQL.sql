@@ -17,3 +17,15 @@ begin
 end $$
 delimiter ;
 call Greeting('Vamsi');
+-- sum of two numbers
+delimiter $$
+create procedure sumOf(in a int, in b int)
+begin 
+	select a+b;
+end $$
+delimiter ;
+call sumOf(5,10);
+
+-- out parameter
+
+

@@ -60,3 +60,21 @@ end $$
 delimiter ;
 call inc_sal();
 
+-- 4. Create a procedure to insert a new employee (IN parameters)
+delimiter $$
+create procedure new_emp(
+	in emp_n varchar(20),
+    in emp_sal int,
+    in emp_dep varchar(20))
+begin
+	set sql_safe_updates=0;
+	insert into employees(name, salary, department)
+    values(emp_n, emp_sal, emp_dep);
+    select * from employees;
+end $$
+delimiter ;
+call new_emp('Hari', 30000, 'IT');
+
+
+
+

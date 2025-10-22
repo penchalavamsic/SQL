@@ -24,13 +24,8 @@ VALUES ('HR', 'Hyderabad'),
 
 -- deleting procedure
 DROP PROCEDURE IF EXISTS resetSal;
-
-
 -- operations
 -- Create a procedure to reset all employee salaries to 50000
-
-
-
 delimiter $$
 create procedure resetSal()
 begin
@@ -40,3 +35,15 @@ begin
  end $$
 delimiter ;
 call resetSal();
+
+-- 2. Create a procedure to delete all employees in the HR department.
+delimiter $$
+create procedure deleHR()
+begin 
+	set sql_safe_updates=0;
+	delete employees from employees where department='HR';
+    select * from employees;
+end $$
+delimiter ;
+call deleHR();
+

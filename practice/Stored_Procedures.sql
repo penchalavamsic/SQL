@@ -88,7 +88,16 @@ delimiter ;
 
 call new_dep('Sales');
 
---6. Create a procedure to delete an employee by name (IN parameter)
+-- 6. Create a procedure to delete an employee by name (IN parameter)
+delimiter $$
+create procedure del_emp(in ename varchar(20))
+begin 
+	set sql_safe_updates=0;
+ delete employees from employees where name=ename;
+	select * from employees;
+end $$
+delimiter ;
+call del_emp('Bob');
 
 
 

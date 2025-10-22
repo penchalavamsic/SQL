@@ -108,7 +108,7 @@ begin
  select *from employees;
  end $$
  delimiter ;
- call emp_dep('Sales')
+ call emp_dep('Sales');
 
 
 

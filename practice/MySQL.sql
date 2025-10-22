@@ -56,7 +56,16 @@ begin
  end $$
  delimiter ;
  call nestedP();
- 
+ -- Greet user and show current date
+DELIMITER $$
+CREATE PROCEDURE greetsin(IN name VARCHAR(10))
+BEGIN
+    SELECT CONCAT('Hi ', name, ' ', CURDATE()) AS Greeting;
+END $$
+DELIMITER ;
+CALL greetsin('Lokesh');
+
+
 
 
 

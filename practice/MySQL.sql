@@ -46,6 +46,16 @@ delimiter ;
 set @a=10;
 call doubleval(@a);
 select @a;
+
+-- nested procedures
+delimiter $$
+create procedure nestedP()
+begin
+ call hi('Bhavya');
+ call sumOf(5,2);
+ end $$
+ delimiter ;
+ call nestedP();
  
 
 

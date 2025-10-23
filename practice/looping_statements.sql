@@ -18,6 +18,24 @@ begin
     end //
     delimiter ;
     call simple_loop();
-        
-        
+   drop procedure if exists even;  
+-- printing even numbers
+create table temp (nums int);
+delimiter //
+create procedure even()
+begin
+	declare n int;
+    set n=0;
+    loops:loop
+		set n=n+2;
+        insert into temp values(n);
+        if n=10 then
+			leave loops;
+        end if;
+	end loop loops;
+	
+    end //
+    delimiter ;
+call even();
+select * from temp;
 		

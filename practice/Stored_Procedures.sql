@@ -150,7 +150,23 @@ delimiter ;
 call emp_name(3, @n);
 select @n as Name_emp;
 
+-- 12. Create a procedure to increase salary of an employee by a given percentage (IN
+-- parameters).
 
+delimiter //
+create procedure sal_inc(in n varchar(20), in per decimal(10,2))
+begin
+	set sql_safe_updates=0;
+ update employees set salary=(salary*per) where name=n;
+ select * from employees;
+ end //
+ delimiter ;
+ call sal_inc('charlie', 2.05);
+ 
+ -- 13. Create a procedure to add a bonus to an employee and return updated salary
+-- (INOUT parameter).
+ 
+ 
 
 
 

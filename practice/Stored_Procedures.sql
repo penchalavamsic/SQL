@@ -242,6 +242,7 @@ delimiter ;
 call del_dep('HR');
 select * from departments;
 	
+    
 -- 19. Create a procedure to find the total salary paid in a department (IN and OUT)
 delimiter //
 create procedure total_sal(inout dep varchar(20))
@@ -251,6 +252,18 @@ end //
 delimiter ;
 set @dep='IT';
 call total_sal(@dep);
+
+-- 20. Create a procedure to find the minimum salary and return it (OUT parameter).
+delimiter //
+create procedure min_sal(out min_saly int)
+begin
+	select min(salary) as min_saly from employees;
+end //
+delimiter ;
+call min_sal(@min_saly);
+
+
+
 
 
  

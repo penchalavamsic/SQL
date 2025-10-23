@@ -242,8 +242,16 @@ delimiter ;
 call del_dep('HR');
 select * from departments;
 	
-    
 -- 19. Create a procedure to find the total salary paid in a department (IN and OUT)
+delimiter //
+create procedure total_sal(inout dep varchar(20))
+begin
+	select sum(salary) as total_salary from employees where department =dep;
+end //
+delimiter ;
+set @dep='IT';
+call total_sal(@dep);
+
 
  
  

@@ -109,6 +109,19 @@ begin
  end $$
  delimiter ;
  call emp_dep('Sales');
+ 
+ -- 8. Create a procedure to get the highest salary (OUT parameter).
+ delimiter //
+ create procedure highest(out a int)
+ begin
+	select max(salary) into a from employees;
+end //
+delimiter ;
+call highest(@a);
+select @a as highest_salary;
+
+-- 9.Create a procedure to get average salary (OUT parameter). 
+ 
 
 
 

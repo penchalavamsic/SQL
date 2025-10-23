@@ -131,9 +131,24 @@ call avg_sal(@a);
 select @a as avg_salary;
 
 -- 10.Create a procedure to get department count (OUT parameter).
- 
+ delimiter //
+ create procedure dep_count(out a int)
+ begin 
+	select count(*)department into a from employees;
+end //
+delimiter ;
+call dep_count(@a);
+select @a as depart_count;
 
-
+-- 11. Create a procedure to get an employee’s name by ID (IN and OUT parameter).
+delimiter //
+create procedure emp_name(in i int, out n varchar(20))
+begin
+	select name  into n from employees where emp_id=i;
+end //
+delimiter ;
+call emp_name(3, @n);
+select @n as Name_emp;
 
 
 

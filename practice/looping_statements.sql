@@ -38,4 +38,22 @@ begin
     delimiter ;
 call even();
 select * from temp;
+drop procedure if exists numbers;
+-- while statements
+-- printing 10 numbers
+create table sample (nums int);
+delimiter //
+create procedure numbers()
+begin
+	declare n int;
+    set n=0;
+ nos:while
+ n<=10 do
+	insert into sample values (n);
+    set n=n+1;
+    end while nos;
+end //
+delimiter ;
+call numbers();
+select * from sample;
 		

@@ -194,8 +194,19 @@ call move(@d, @n);
 select @d as new_dep;
 select * from employees;
 
--- 
- 
+-- 15. Create a procedure to change department location and return updated location
+-- (INOUT parameter).
+select * from departments;
+delimiter //
+create procedure loc(inout d_name varchar(20), inout l varchar(20))
+begin 
+	update departments set location=l where dept_name=d_name;
+end //
+delimiter ;
+set @d_name='HR';
+set @l='Bangalore';
+call loc(@d_name, @l);
+select * from department;
  
  
 

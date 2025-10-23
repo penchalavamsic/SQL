@@ -217,10 +217,34 @@ begin
 end //
 delimiter ;
 call sal_earn(30000);
+select * from departments;
 
--- 
-    
+
+
+-- 17. Create a procedure to show all departments in a specific location (IN parameter).
+delimiter //
+create procedure loca(in l varchar(20))
+begin
+	select dept_id, dept_name from departments where location=l;
+end //
+delimiter ;
+call loca('Bangalore');
+
+
+
+-- 18. Create a procedure to delete a department by name (IN parameter).
+delimiter //
+create procedure del_dep(in n varchar(20))
+begin 
+	delete from departments where dept_name=n;
+end //
+delimiter ;
+call del_dep('HR');
+select * from departments;
 	
+    
+-- 19. Create a procedure to find the total salary paid in a department (IN and OUT)
+
  
  
 

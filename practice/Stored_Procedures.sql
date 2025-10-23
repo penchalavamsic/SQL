@@ -179,6 +179,23 @@ begin
  select @a, @n;
  select * from employees;
  
+ -- 14. Create a procedure to move an employee to another department and return new
+-- department name (INOUT parameter).
+
+delimiter //
+create procedure move(inout d varchar(20), inout n varchar(20))
+begin
+ update employees set department= d where name=n;
+end //
+delimiter ;
+set @d='IT';
+set @n='charlie';
+call move(@d, @n);
+select @d as new_dep;
+select * from employees;
+
+-- 
+ 
  
  
 

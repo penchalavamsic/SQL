@@ -39,8 +39,12 @@ begin
 call even();
 select * from temp;
 drop procedure if exists numbers;
+
+
 -- while statements
 -- printing 10 numbers
+
+
 create table sample (nums int);
 delimiter //
 create procedure numbers()
@@ -56,4 +60,26 @@ end //
 delimiter ;
 call numbers();
 select * from sample;
+
+drop procedure if exists odd;
+-- repeat statement
+-- printing odd numbers
+delimiter //
+create procedure odd()
+begin
+	declare n int;
+    declare res text default'';
+	set n=1;
+    odd_val:repeat
+		set res=concat(res, n, ' ');
+        set n=n+2;
+	until n>=10
+	end repeat;
+    select res;
+end //
+delimiter ;
+call odd();
+    
+    
+
 		

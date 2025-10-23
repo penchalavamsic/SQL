@@ -165,6 +165,20 @@ begin
  
  -- 13. Create a procedure to add a bonus to an employee and return updated salary
 -- (INOUT parameter).
+delimiter //
+create procedure bonus(inout a int, inout n varchar(20))
+begin
+ set sql_safe_updates=0;
+ update employees set salary=salary+a where name=n;
+ select * from employees;
+ end //
+ delimiter ;
+ set @a=1000;
+ set @n='charlie';
+ call bonus(@a, @n);
+ select @a, @n;
+ select * from employees;
+ 
  
  
 

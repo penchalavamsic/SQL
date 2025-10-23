@@ -206,7 +206,21 @@ delimiter ;
 set @d_name='HR';
 set @l='Bangalore';
 call loc(@d_name, @l);
-select * from department;
+select * from employees;
+drop procedure if exists sal_earn
+
+-- 16. Create a procedure to show employees earning above a given salary (IN parameter).
+delimiter //
+create procedure sal_earn(in sal int)
+begin 
+	select name, salary from employees where salary>sal;
+end //
+delimiter ;
+call sal_earn(30000);
+
+-- 
+    
+	
  
  
 

@@ -121,6 +121,16 @@ call highest(@a);
 select @a as highest_salary;
 
 -- 9.Create a procedure to get average salary (OUT parameter). 
+delimiter //
+create procedure avg_sal(out a decimal(15,2))
+begin
+	select avg(salary) into a from employees;
+end //
+delimiter ;
+call avg_sal(@a);
+select @a as avg_salary;
+
+-- 10.Create a procedure to get department count (OUT parameter).
  
 
 

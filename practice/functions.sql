@@ -112,7 +112,21 @@ begin
 end //
 delimiter ;
 select disc_price('Harry Potter') as discounted_price;
-	
+
+drop function auth_c;
+
+-- Write a function to return the author's country for a given book.
+delimiter //
+create function auth_c(b_name varchar(20))
+returns varchar(20) deterministic
+begin 
+	declare c_name varchar(20);
+    select author_name into c_name from authors where country=b_name limit 1;
+    return c_name;
+end //
+delimiter ;
+
+select auth_c('india');
 
 
     

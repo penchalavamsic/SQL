@@ -60,7 +60,19 @@ end //
 delimiter ;
 select price('Harry Potter');
 
+-- Write a function to find how many books an author has written.
+delimiter //
+create function a_books(a_id int)
+returns int deterministic
+begin 
+	declare n_book int;
+    select count(*) into n_book from books where author_id=a_id;
+    return n_book;
+end //
+delimiter ;
+select a_books(1) as No_Of_books;
 
+-- 
     
 	
 	

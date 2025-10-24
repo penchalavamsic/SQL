@@ -144,6 +144,21 @@ end //
 delimiter ;
 select t_value();
     
+-- Write a function to return the oldest book title in the store.
+
+delimiter //
+create function oldest_b()
+returns varchar(20) deterministic
+begin 
+	declare old_year int;
+    declare old_bt varchar(20);
+    select min(published_year) into old_year from books;
+    select title into old_bt from books where published_year=old_year limit 1;
+    return old_bt;
+    end //
+delimiter ;
+select oldest_b();
+    
 
 
     

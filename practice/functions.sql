@@ -147,17 +147,32 @@ select t_value();
 -- Write a function to return the oldest book title in the store.
 
 delimiter //
-create function oldest_b()
-returns varchar(20) deterministic
+create function oldest_bk()
+returns varchar(100) deterministic
 begin 
 	declare old_year int;
-    declare old_bt varchar(20);
+    declare old_bt varchar(100);
     select min(published_year) into old_year from books;
     select title into old_bt from books where published_year=old_year limit 1;
     return old_bt;
     end //
 delimiter ;
-select oldest_b();
+select oldest_bk();
+
+-- Write a function to check if a given book is in stock or not.
+
+delimiter //
+create function checks(b_name varchar(100))
+returns varchar(20) deterministic
+begin 
+	declare exists_v int;
+    select exists(
+		select 1 from books where title=b_name)
+        into exists_v;
+        return exists_v;
+	end //
+delimiter ;
+select checks('harry potter');
     
 
 

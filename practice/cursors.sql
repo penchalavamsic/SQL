@@ -1,0 +1,2 @@
+-- cursors
+use assg2;

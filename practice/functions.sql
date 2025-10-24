@@ -46,7 +46,24 @@ begin
  delimiter ;
  select total_b();
  
+ drop function price;
  
+ -- Write a function to return the price of a given book title.
+ delimiter //
+ create function price(b_name varchar(20))
+ returns decimal(10,2) deterministic
+ begin 
+	declare b_price decimal(10,2);
+    select b.price into b_price  from books as b  where b.title=b_name;
+    return b_price;
+end //
+delimiter ;
+select price('Harry Potter');
+
+
+    
+	
+	
 	
 
 

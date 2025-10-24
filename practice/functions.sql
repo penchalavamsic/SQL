@@ -46,19 +46,28 @@ begin
  delimiter ;
  select total_b();
  
- drop function price;
  
+ drop function price_B
  -- Write a function to return the price of a given book title.
- delimiter //
- create function price(b_name varchar(20))
- returns decimal(10,2) deterministic
- begin 
-	declare b_price decimal(10,2);
-    select b.price into b_price  from books as b  where b.title=b_name;
-    return b_price;
-end //
-delimiter ;
-select price('Harry Potter');
+ DELIMITER //
+
+CREATE FUNCTION price_B(b_name VARCHAR(50))
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE b_price DECIMAL(10,2);
+    SELECT price 
+    INTO b_price  
+    FROM books
+    WHERE title = b_name 
+    LIMIT 1;
+    RETURN b_price;
+END //
+
+DELIMITER ;
+
+SELECT price_B('Harry Potter') AS book_price;
+ 
 
 -- Write a function to find how many books an author has written.
 delimiter //
@@ -90,7 +99,19 @@ end //
 delimiter ;
 select Old_new(1999);
 	
-	
+-- Write a function to calculate a 10% discount on the price of a given book.
+delimiter //
+create function disc_price(b_name varchar(20))returns decimal(10,2) deterministic
+begin
+	declare original_price decimal(10,2);
+    declare discount decimal(10,2);
+    select price into original_price from books where title=b_name limit 1;
+    
+    set discount= original_price*0.9;
+    return discount;
+end //
+delimiter ;
+select disc_price('Harry Potter') as discounted_price;
 	
 
 

@@ -72,8 +72,23 @@ end //
 delimiter ;
 select a_books(1) as No_Of_books;
 
--- 
-    
+-- Write a function to return whether a book is "Old" or "New" based on its published year
+-- (before 2000 → Old, else → New).
+
+delimiter //
+create function Old_new(y int)
+returns varchar(20) deterministic
+begin
+	declare ot varchar(20);
+	if y < 2000 then
+		set ot='old';
+	else	
+		set ot='new';
+    end if;
+return ot;
+end //
+delimiter ;
+select Old_new(1999);
 	
 	
 	

@@ -173,7 +173,19 @@ begin
 	end //
 delimiter ;
 select checks('harry potter');
-    
+
+-- Write a function to return the total number of books available by authors from a specific
+-- country.
+delimiter //
+create function t_book(c varchar(20))
+returns int deterministic
+begin 
+		declare n_books int;
+        select sum(b.stock) into n_books from books b join authors a on b.author_id=a.author_id where a.country=c;
+        return n_books;
+end //
+delimiter ;
+select t_book('india') as Total_books;
 
 
     

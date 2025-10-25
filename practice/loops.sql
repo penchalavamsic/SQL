@@ -15,4 +15,16 @@ INSERT INTO employees (name, department, salary) VALUES
 ('Farhan', 'Finance', 30000);
 
 -- Increase salary of first 3 employees by 10%.
-delimiter 
+delimiter //
+create procedure inc_sal()
+begin
+declare emp_sal decimal(10,2);
+ sal:loop
+	select salary into emp_sal from employees limit 3;
+    set emp_sal=emp_sal*0.9;
+    select emp_sal;
+    end loop;
+end //
+delimiter ;
+call inc_sal();
+

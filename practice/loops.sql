@@ -116,7 +116,30 @@ end //
 delimiter ;
 call g_sal();
 
--- 
+-- repeat
+-- Add ₹5,000 to one employee’s salary until it exceeds ₹40,000
+drop procedure if exists e_sal;
+drop table new_sal;
+delimiter //
+create procedure e_sal()
+begin
+ declare s decimal(20,2);
+ declare sal_details decimal(20,2);
+ create temporary table new_sal(n_sal decimal(20,2));
+ 
+ select salary into sal_details from employees limit 1;
+ if sal_details<40000 then
+ repeat
+	set sal_details=sal_details+5000;
+    insert into new_sal values(sal_details);
+    until sal_details>=40000
+    end repeat;
+end if;
+select * from new_sal;
+end //
+delimiter ;
+call e_sal();
+
     
     
      

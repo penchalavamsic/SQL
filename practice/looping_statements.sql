@@ -62,6 +62,8 @@ call numbers();
 select * from sample;
 
 drop procedure if exists odd;
+
+
 -- repeat statement
 -- printing odd numbers
 delimiter //

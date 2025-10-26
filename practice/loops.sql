@@ -45,7 +45,32 @@ end //
     delimiter ;
 call inc_sal();
 
--- 
+
+
+-- Display all employee names using LOOP
+drop procedure if exists all_emp;
+drop table na;
+delimiter $$
+create procedure all_emp()
+begin 
+ declare n varchar(20);
+ declare total int;
+ declare c int default 0;
+ create temporary table na(result varchar(20));
+ select count(*) into total from employees;
+ n_loop:loop
+	if c>=total then
+		leave n_loop;
+	end if;
+	select name into n from employees order by name limit c, 1;
+    insert into na values(n);
+    set c=c+1;
+end loop n_loop;
+select * from na;
+end $$
+delimiter ;
+call all_emp();
+ 
 
 
 

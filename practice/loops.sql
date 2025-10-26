@@ -89,6 +89,38 @@ select * from na;
 end $$
 delimiter ;
 call all_emp();
+
+-- while
+-- Display employees having salary greater than ₹30,000
+drop procedure if exists g_sal;
+drop table details;
+delimiter //
+create procedure g_sal()
+begin
+	 declare i int default 0;
+     declare c int default 0;
+     declare emp_name varchar(20);
+     declare emp_sal decimal(20,2);
+	create temporary table details(d varchar(30), d_sal decimal(20,2));
+	select count(*) into c from employees;
+    emp_det: while
+    i<=c do
+    select name , salary into emp_name, emp_sal from employees limit i, 1;
+    if emp_sal>30000 then
+		insert into details values(emp_name, emp_sal);
+	end if;
+    set i=i+1;
+end while;
+select * from details;
+end //
+delimiter ;
+call g_sal();
+
+-- 
+    
+    
+     
+    
  
 
 

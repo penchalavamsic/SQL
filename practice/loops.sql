@@ -45,6 +45,25 @@ end //
     delimiter ;
 call inc_sal();
 
+drop procedure if exists t_sal;
+drop table sal_val;
+-- Calculate total salary of all employees using LOOP
+delimiter //
+create procedure t_sal()
+begin 
+	declare sal_t decimal(10,2);
+    declare c int default 0;
+    declare i int default 0;
+    create temporary table sal_val(val decimal(20,2));
+    select count(*) into c from employees;
+    salaries:loop
+        select sum(salary) into sal_t from employees limit i,1;
+        insert into sal_val  values(sal_t);
+	end loop;
+end //
+delimiter ;
+call t_sal();
+select * from sal_val;
 
 
 -- Display all employee names using LOOP

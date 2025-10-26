@@ -14,17 +14,33 @@ INSERT INTO employees (name, department, salary) VALUES
 ('Esha', 'HR', 35000),
 ('Farhan', 'Finance', 30000);
 
+drop procedure if exists inc_sal;
 -- Increase salary of first 3 employees by 10%.
 delimiter //
 create procedure inc_sal()
 begin
+declare i int default 1;
+declare emp_id int;
+declare emp_name varchar(20);
 declare emp_sal decimal(10,2);
- sal:loop
-	select salary into emp_sal from employees limit 3;
-    set emp_sal=emp_sal*0.9;
-    select emp_sal;
-    end loop;
+declare done int default 0;
+declare counter int default 1;
+declare continue handler for not found set done=1;
+create temporary table t(result varchar(100));
+loop_sal:loop
+	if counter >3 or done =1 then
+		leave loop_sal;
+	end if;
+		select id, name, salary into emp_id, emp_name, emp_sal from employees order by id limit counter, 1;
+        set emp_sal=emp_sal*1.1;
+        update employees set salary =emp_sal where id=emp_id;
+        insert into t values(concat('Employee ', emp_name,'Salary ',emp_sal));
+        set counter=counter+1;
+	end loop loop_sal;
+    select * from t;
 end //
-delimiter ;
+    delimiter ;
 call inc_sal();
+
+
 

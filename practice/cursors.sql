@@ -33,4 +33,35 @@ close order_of;
 end //
 delimiter ;
 call p_data();
+
+
+--  Fetch all product names from the products table using a cursor and display them.
+drop procedure if exists name_p;
+drop table n;
+delimiter //
+create temporary table n(result varchar(20));
+create procedure name_p()
+
+begin
+	declare p_names varchar(20);
+    declare done int default false;
+    declare cursor_n cursor for select name from products;
+    declare continue handler for not found set done =true;
+    open cursor_n;
+    read_loop:loop
+		fetch cursor_n into p_names;
+		insert into n values(p_names);
+        if done then
+			leave read_loop;
+		end if;
+	end loop;
+    close cursor_n;
+    end //
+delimiter ;
+
+call name_p();
+select * from n;
+
+    
+
  

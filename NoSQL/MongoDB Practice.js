@@ -41,3 +41,7 @@ db.cdac.insertOne({name:'sai',})
   insertedId: ObjectId('69070a3ceacb24b749a1a792')
 }
 db.cdac.insertOne({name:'lokesh',course:'DESD',year:2017,address:{city:'pune',state:'Maharastra'}})
+
+
+//insert with array
+db.cdac.insertOne({name:'Bhavya',course:'VLSI',year:2017,skill:['Verilog','Micro-Controllers']});
